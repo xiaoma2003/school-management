@@ -11,6 +11,7 @@
         .sidebar li { padding: 10px 20px; }
         .sidebar li:hover { background: #34495e; }
         .sidebar a { color: white; text-decoration: none; display: block; }
+        .sidebar .nav-module { background: #1e88e5; }
         .content { margin-left: 200px; padding: 20px; }
         .header { background: #f8f9fa; padding: 15px 20px; border-bottom: 1px solid #e9ecef; }
         .header a { float: right; color: #666; text-decoration: none; }
@@ -21,18 +22,19 @@
         .form-group { margin-bottom: 15px; }
         .form-group label { display: block; margin-bottom: 5px; }
         .form-group input, select { width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
-    </style>
+    .required { color: #dc3545; margin-left: 4px; }
+</style>
 </head>
 <body>
     <div class="sidebar">
         <h2>校生通管理系统</h2>
         <ul>
             <li><a href="<%= ctx %>/main">首页</a></li>
-            <li><a href="<%= ctx %>/system/post/list">系统管理</a></li>
+            <li class="nav-module"><a href="<%= ctx %>/system/post/list">系统管理</a></li>
             <li><a href="<%= ctx %>/school/grade/list">年级管理</a></li>
             <li><a href="<%= ctx %>/school/class/list">班级管理</a></li>
             <li><a href="<%= ctx %>/school/student/list">学生管理</a></li>
-            <li><a href="<%= ctx %>/equipment/list">设备管理</a></li>
+            <li class="nav-module"><a href="<%= ctx %>/equipment/list">设备管理</a></li>
         </ul>
     </div>
     <div class="content">

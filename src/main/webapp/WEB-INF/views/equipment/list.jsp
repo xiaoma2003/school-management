@@ -12,6 +12,7 @@
         .sidebar li { padding: 10px 20px; }
         .sidebar li:hover { background: #34495e; }
         .sidebar a { color: white; text-decoration: none; display: block; }
+        .sidebar .nav-module { background: #1e88e5; }
         .sidebar .active { background: #34495e; }
         .content { margin-left: 200px; padding: 20px; }
         .header { background: #f8f9fa; padding: 15px 20px; border-bottom: 1px solid #e9ecef; }
@@ -36,15 +37,16 @@
         .modal-header { font-size: 18px; font-weight: bold; margin-bottom: 15px; }
         .modal-footer { text-align: right; margin-top: 15px; }
         .modal .btn-cancel { background: #6c757d; }
-    </style>
+    .required { color: #dc3545; margin-left: 4px; }
+</style>
 </head>
 <body>
     <div class="sidebar">
         <h2>校生通管理系统</h2>
         <ul>
             <li><a href="<%= ctx %>/main">首页</a></li>
-            <li><a href="<%= ctx %>/system/post/list">系统管理</a></li>
-            <li><a href="<%= ctx %>/school/grade/list">学校管理</a></li>
+            <li class="nav-module"><a href="<%= ctx %>/system/post/list">系统管理</a></li>
+            <li class="nav-module"><a href="<%= ctx %>/school/grade/list">学校管理</a></li>
             <li><a href="<%= ctx %>/equipment/list" class="active">设备管理</a></li>
         </ul>
     </div>

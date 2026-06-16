@@ -15,7 +15,8 @@
         .btn { width: 100%; padding: 10px; background: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
         .btn:hover { background: #45a049; }
         .error { color: red; text-align: center; margin-bottom: 10px; }
-    </style>
+    .required { color: #dc3545; margin-left: 4px; }
+</style>
 </head>
 <body>
     <div class="login-box">

@@ -12,6 +12,7 @@
         .sidebar li { padding: 10px 20px; }
         .sidebar li:hover { background: #34495e; }
         .sidebar a { color: white; text-decoration: none; display: block; }
+        .sidebar .nav-module { background: #1e88e5; }
         .content { margin-left: 200px; padding: 20px; }
         .header { background: #f8f9fa; padding: 15px 20px; border-bottom: 1px solid #e9ecef; }
         .header a { float: right; color: #666; text-decoration: none; }
@@ -27,7 +28,8 @@
         th { background: #f8f9fa; }
         .status-active { color: green; }
         .status-inactive { color: red; }
-    </style>
+    .required { color: #dc3545; margin-left: 4px; }
+</style>
 </head>
 <body>
     <div class="sidebar">
@@ -38,8 +40,8 @@
             <li><a href="<%= ctx %>/system/dept/list">部门管理</a></li>
             <li><a href="<%= ctx %>/system/role/list">角色管理</a></li>
             <li><a href="<%= ctx %>/system/user/list">用户管理</a></li>
-            <li><a href="<%= ctx %>/school/grade/list">学校管理</a></li>
-            <li><a href="<%= ctx %>/equipment/list">设备管理</a></li>
+            <li class="nav-module"><a href="<%= ctx %>/school/grade/list">学校管理</a></li>
+            <li class="nav-module"><a href="<%= ctx %>/equipment/list">设备管理</a></li>
         </ul>
     </div>
     <div class="content">
