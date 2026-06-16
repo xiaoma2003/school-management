@@ -65,22 +65,22 @@
                 <th>备注</th>
                 <th>操作</th>
             </tr>
-            <c:forEach items="${equipments}" var="eq">
+            <c:forEach items="${equipments}" var="equipment">
             <tr>
-                <td>${eq.equipmentNo}</td>
-                <td>${eq.equipmentName}</td>
-                <td>${eq.deptName == null ? '-' : eq.deptName}</td>
-                <td>${eq.className == null ? '-' : eq.className}</td>
+                <td>${equipment.equipmentNo}</td>
+                <td>${equipment.equipmentName}</td>
+                <td>${equipment.deptName == null ? '-' : equipment.deptName}</td>
+                <td>${equipment.className == null ? '-' : equipment.className}</td>
                 <td>
-                    <span class="${eq.status == 1 ? 'status-normal' : 'status-faulty'}">
-                        ${eq.status == 1 ? '正常' : '故障'}
+                    <span class="${equipment.status == 1 ? 'status-normal' : 'status-faulty'}">
+                        ${equipment.status == 1 ? '正常' : '故障'}
                     </span>
                 </td>
-                <td>${eq.remark == null ? '-' : eq.remark}</td>
+                <td>${equipment.remark == null ? '-' : equipment.remark}</td>
                 <td>
-                    <a href="<%= ctx %>/equipment/edit/${eq.equipmentId}" class="btn btn-edit" style="display: inline-block;">编辑</a>
-                    <button onclick="showStatusModal(${eq.equipmentId}, ${eq.status})" class="btn btn-warning" style="display: inline-block;">改状态</button>
-                    <a href="<%= ctx %>/equipment/delete/${eq.equipmentId}" class="btn btn-danger" style="display: inline-block;" onclick="return confirm('确定删除？')">删除</a>
+                    <a href="<%= ctx %>/equipment/edit/${equipment.equipmentId}" class="btn btn-edit" style="display: inline-block;">编辑</a>
+                    <button onclick="showStatusModal(${equipment.equipmentId}, ${equipment.status})" class="btn btn-warning" style="display: inline-block;">改状态</button>
+                    <a href="<%= ctx %>/equipment/delete/${equipment.equipmentId}" class="btn btn-danger" style="display: inline-block;" onclick="return confirm('确定删除？')">删除</a>
                 </td>
             </tr>
             </c:forEach>
