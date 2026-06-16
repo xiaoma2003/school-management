@@ -88,9 +88,9 @@ public class SysEquipmentController {
                                @RequestParam(required = false) String remark,
                                HttpSession session) {
         if (session.getAttribute("username") == null) {
-            return "redirect:/login";
+            return "{\"code\":401,\"msg\":\"未登录\"}";
         }
         equipmentService.updateStatus(equipmentId, status, remark);
-        return "success";
+        return "{\"code\":200,\"msg\":\"success\"}";
     }
 }
