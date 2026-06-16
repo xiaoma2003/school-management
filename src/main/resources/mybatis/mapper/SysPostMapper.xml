@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.SysPostMapper">
+    <select id="findAll" resultType="com.example.entity.SysPost">
+        SELECT * FROM sys_post ORDER BY sort_order ASC
+    </select>
+    <select id="findById" resultType="com.example.entity.SysPost">
+        SELECT * FROM sys_post WHERE post_id = #{postId}
+    </select>
+    <insert id="insert">
+        INSERT INTO sys_post (post_name, post_code, sort_order, status)
+        VALUES (#{postName}, #{postCode}, #{sortOrder}, #{status})
+    </insert>
+    <update id="update">
+        UPDATE sys_post SET post_name=#{postName}, post_code=#{postCode}, 
+            sort_order=#{sortOrder}, status=#{status} WHERE post_id=#{postId}
+    </update>
+    <delete id="deleteById">
+        DELETE FROM sys_post WHERE post_id = #{postId}
+    </delete>
+    <select id="countByCode" resultType="int">
+        SELECT COUNT(*) FROM sys_post WHERE post_code = #{postCode}
+    </select>
+</mapper>

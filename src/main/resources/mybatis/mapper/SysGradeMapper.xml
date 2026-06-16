@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.SysGradeMapper">
+    <select id="findAll" resultType="com.example.entity.SysGrade">
+        SELECT * FROM sys_grade ORDER BY sort_order ASC
+    </select>
+    <select id="findById" resultType="com.example.entity.SysGrade">
+        SELECT * FROM sys_grade WHERE grade_id = #{gradeId}
+    </select>
+    <insert id="insert">
+        INSERT INTO sys_grade (grade_name, sort_order, status)
+        VALUES (#{gradeName}, #{sortOrder}, #{status})
+    </insert>
+    <update id="update">
+        UPDATE sys_grade SET grade_name=#{gradeName}, sort_order=#{sortOrder}, 
+            status=#{status} WHERE grade_id=#{gradeId}
+    </update>
+    <delete id="deleteById">
+        DELETE FROM sys_grade WHERE grade_id = #{gradeId}
+    </delete>
+</mapper>

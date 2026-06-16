@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.SysUserMapper">
+    <resultMap id="userMap" type="com.example.entity.SysUser">
+        <id column="user_id" property="userId"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="real_name" property="realName"/>
+        <result column="email" property="email"/>
+        <result column="phone" property="phone"/>
+        <result column="dept_id" property="deptId"/>
+        <result column="post_id" property="postId"/>
+        <result column="role_id" property="roleId"/>
+        <result column="status" property="status"/>
+        <result column="dept_name" property="deptName"/>
+        <result column="post_name" property="postName"/>
+        <result column="role_name" property="roleName"/>
+    </resultMap>
+    <select id="findAll" resultMap="userMap">
+        SELECT u.*, d.dept_name, p.post_name, r.role_name 
+        FROM sys_user u 
+        LEFT JOIN sys_dept d ON u.dept_id = d.dept_id 
+        LEFT JOIN sys_post p ON u.post_id = p.post_id 
+        LEFT JOIN sys_role r ON u.role_id = r.role_id 
+        ORDER BY u.user_id ASC
+    </select>
+    <select id="findById" resultMap="userMap">
+        SELECT u.*, d.dept_name, p.post_name, r.role_name 
+        FROM sys_user u 
+        LEFT JOIN sys_dept d ON u.dept_id = d.dept_id 
+        LEFT JOIN sys_post p ON u.post_id = p.post_id 
+        LEFT JOIN sys_role r ON u.role_id = r.role_id 
+        WHERE u.user_id = #{userId}
+    </select>
+    <select id="findByUsername" resultType="com.example.entity.SysUser">
+        SELECT * FROM sys_user WHERE username = #{username}
+    </select>
+    <insert id="insert">
+        INSERT INTO sys_user (username, password, real_name, email, phone, dept_id, post_id, role_id, status)
+        VALUES (#{username}, #{password}, #{realName}, #{email}, #{phone}, #{deptId}, #{postId}, #{roleId}, #{status})
+    </insert>
+    <update id="update">
+        UPDATE sys_user SET username=#{username}, real_name=#{realName}, email=#{email}, 
+            phone=#{phone}, dept_id=#{deptId}, post_id=#{postId}, role_id=#{roleId}, status=#{status} 
+            WHERE user_id=#{userId}
+    </update>
+    <delete id="deleteById">
+        DELETE FROM sys_user WHERE user_id = #{userId}
+    </delete>
+    <select id="countByUsername" resultType="int">
+        SELECT COUNT(*) FROM sys_user WHERE username = #{username}
+    </select>
+</mapper>
