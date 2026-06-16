@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% String ctx = request.getContextPath(); %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>添加角色</title>
@@ -20,21 +21,23 @@
         .btn:hover { background: #45a049; }
         .btn-cancel { background: #6c757d; }
         .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; margin-bottom: 5px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
         .form-group input, select, textarea { width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
         textarea { height: 80px; }
-    .required { color: #dc3545; margin-left: 4px; }
-</style>
+        .required { color: #dc3545; margin-left: 4px; }
+        .permission-group { margin-top: 20px; border-top: 1px solid #ddd; padding-top: 15px; }
+        .permission-group h4 { margin: 0 0 10px 0; color: #333; }
+        .permission-item { margin-bottom: 10px; }
+        .permission-item label { font-weight: normal !important; }
+        .permission-desc { color: #666; font-size: 12px; margin-left: 20px; }
+    </style>
 </head>
 <body>
     <div class="sidebar">
         <h2>校生通管理系统</h2>
         <ul>
             <li><a href="<%= ctx %>/main">首页</a></li>
-            <li><a href="<%= ctx %>/system/post/list">岗位管理</a></li>
-            <li><a href="<%= ctx %>/system/dept/list">部门管理</a></li>
-            <li><a href="<%= ctx %>/system/role/list">角色管理</a></li>
-            <li><a href="<%= ctx %>/system/user/list">用户管理</a></li>
+            <li class="nav-module"><a href="<%= ctx %>/system/post/list">系统管理</a></li>
             <li class="nav-module"><a href="<%= ctx %>/school/grade/list">学校管理</a></li>
             <li class="nav-module"><a href="<%= ctx %>/equipment/list">设备管理</a></li>
         </ul>
@@ -47,16 +50,16 @@
         <h2>添加角色</h2>
         <form action="<%= ctx %>/system/role/save" method="post">
             <div class="form-group">
-                <label>角色名称</label>
-                <input type="text" name="roleName" required>
+                <label>角色名称<span class="required">*</span></label>
+                <input type="text" name="roleName" required placeholder="请输入角色名称">
             </div>
             <div class="form-group">
-                <label>角色编码</label>
-                <input type="text" name="roleCode" required>
+                <label>角色编码<span class="required">*</span></label>
+                <input type="text" name="roleCode" required placeholder="请输入角色编码">
             </div>
             <div class="form-group">
                 <label>描述</label>
-                <textarea name="description"></textarea>
+                <textarea name="description" placeholder="请输入角色描述"></textarea>
             </div>
             <div class="form-group">
                 <label>状态</label>
@@ -65,6 +68,20 @@
                     <option value="0">禁用</option>
                 </select>
             </div>
+
+            <div class="permission-group">
+                <h4>权限配置</h4>
+                <c:forEach items="${permissions}" var="perm">
+                    <div class="permission-item">
+                        <label>
+                            <input type="checkbox" name="permissionIds" value="${perm.permissionId}">
+                            ${perm.permissionName}
+                        </label>
+                        <div class="permission-desc">${perm.description}</div>
+                    </div>
+                </c:forEach>
+            </div>
+
             <button type="submit" class="btn">保存</button>
             <a href="<%= ctx %>/system/role/list" class="btn btn-cancel">取消</a>
         </form>

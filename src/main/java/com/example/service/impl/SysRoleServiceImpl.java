@@ -1,10 +1,13 @@
 package com.example.service.impl;
 
+import com.example.entity.SysPermission;
 import com.example.entity.SysRole;
+import com.example.mapper.SysPermissionMapper;
 import com.example.mapper.SysRoleMapper;
 import com.example.service.SysRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -13,6 +16,9 @@ public class SysRoleServiceImpl implements SysRoleService {
 
     @Autowired
     private SysRoleMapper roleMapper;
+
+    @Autowired
+    private SysPermissionMapper permissionMapper;
 
     @Override
     public List<SysRole> findAll() {
@@ -30,22 +36,38 @@ public class SysRoleServiceImpl implements SysRoleService {
     }
 
     @Override
-    public void save(SysRole role) {
+    @Transactional
+    public void save(SysRole role, List<Integer> permissionIds) {
         roleMapper.insert(role);
+        if (permissionIds != null && !permissionIds.isEmpty()) {
+            roleMapper.insertPermissions(role.getRoleId(), permissionIds);
+        }
     }
 
     @Override
-    public void update(SysRole role) {
+    @Transactional
+    public void update(SysRole role, List<Integer> permissionIds) {
         roleMapper.update(role);
+        roleMapper.deletePermissionsByRoleId(role.getRoleId());
+        if (permissionIds != null && !permissionIds.isEmpty()) {
+            roleMapper.insertPermissions(role.getRoleId(), permissionIds);
+        }
     }
 
     @Override
+    @Transactional
     public void deleteById(Integer roleId) {
+        roleMapper.deletePermissionsByRoleId(roleId);
         roleMapper.deleteById(roleId);
     }
 
     @Override
     public boolean existsByCode(String roleCode) {
         return roleMapper.countByCode(roleCode) > 0;
+    }
+
+    @Override
+    public List<SysPermission> findAllPermissions() {
+        return permissionMapper.findAll();
     }
 }

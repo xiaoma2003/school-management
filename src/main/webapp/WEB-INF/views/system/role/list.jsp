@@ -28,6 +28,7 @@
         th { background: #f8f9fa; }
         .status-active { color: green; }
         .status-inactive { color: red; }
+        .permission-tag { display: inline-block; padding: 2px 8px; background: #e3f2fd; color: #1976d2; border-radius: 4px; font-size: 12px; margin: 2px; }
     .required { color: #dc3545; margin-left: 4px; }
 </style>
 </head>
@@ -36,10 +37,7 @@
         <h2>校生通管理系统</h2>
         <ul>
             <li><a href="<%= ctx %>/main">首页</a></li>
-            <li><a href="<%= ctx %>/system/post/list">岗位管理</a></li>
-            <li><a href="<%= ctx %>/system/dept/list">部门管理</a></li>
-            <li><a href="<%= ctx %>/system/role/list">角色管理</a></li>
-            <li><a href="<%= ctx %>/system/user/list">用户管理</a></li>
+            <li class="nav-module"><a href="<%= ctx %>/system/post/list">系统管理</a></li>
             <li class="nav-module"><a href="<%= ctx %>/school/grade/list">学校管理</a></li>
             <li class="nav-module"><a href="<%= ctx %>/equipment/list">设备管理</a></li>
         </ul>
@@ -56,6 +54,7 @@
                 <th>角色名称</th>
                 <th>角色编码</th>
                 <th>描述</th>
+                <th>权限</th>
                 <th>状态</th>
                 <th>操作</th>
             </tr>
@@ -64,6 +63,11 @@
                 <td>${role.roleName}</td>
                 <td>${role.roleCode}</td>
                 <td>${role.description}</td>
+                <td>
+                    <c:forEach items="${role.permissions}" var="perm">
+                        <span class="permission-tag">${perm.permissionName}</span>
+                    </c:forEach>
+                </td>
                 <td><span class="${role.status == 1 ? 'status-active' : 'status-inactive'}">${role.status == 1 ? '启用' : '禁用'}</span></td>
                 <td>
                     <a href="<%= ctx %>/system/role/edit/${role.roleId}" class="btn btn-edit" style="display: inline-block;">编辑</a>

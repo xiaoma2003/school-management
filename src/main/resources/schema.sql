@@ -99,3 +99,35 @@ CREATE TABLE IF NOT EXISTS `sys_equipment` (
     FOREIGN KEY (`dept_id`) REFERENCES `sys_dept`(`dept_id`),
     FOREIGN KEY (`class_id`) REFERENCES `sys_class`(`class_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 权限表
+CREATE TABLE IF NOT EXISTS `sys_permission` (
+    `permission_id` INT AUTO_INCREMENT PRIMARY KEY,
+    `permission_name` VARCHAR(100) NOT NULL COMMENT '权限名称',
+    `permission_code` VARCHAR(50) UNIQUE NOT NULL COMMENT '权限代码',
+    `permission_type` VARCHAR(20) NOT NULL COMMENT '权限类型: system/school/equipment',
+    `permission_level` VARCHAR(20) COMMENT '权限级别: view/manage/full',
+    `description` VARCHAR(500) COMMENT '权限描述',
+    `create_time` DATETIME DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 角色权限关联表
+CREATE TABLE IF NOT EXISTS `sys_role_permission` (
+    `role_id` INT NOT NULL,
+    `permission_id` INT NOT NULL,
+    PRIMARY KEY (`role_id`, `permission_id`),
+    FOREIGN KEY (`role_id`) REFERENCES `sys_role`(`role_id`),
+    FOREIGN KEY (`permission_id`) REFERENCES `sys_permission`(`permission_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 初始化权限数据
+INSERT INTO `sys_permission` (`permission_name`, `permission_code`, `permission_type`, `permission_level`, `description`) VALUES
+('系统管理', 'system:manage', 'system', 'full', '系统管理权限，能进入系统管理模块并进行所有操作'),
+('学校查看', 'school:view', 'school', 'view', '学校管理查看权限，只能查看学校管理信息'),
+('学校管理', 'school:manage', 'school', 'manage', '学校管理操作权限，能查看、添加、修改学校管理信息'),
+('设备查看', 'equipment:view', 'equipment', 'view', '设备管理查看权限，只能查看设备信息'),
+('设备管理', 'equipment:manage', 'equipment', 'manage', '设备管理操作权限，能查看、添加、修改设备信息');
+
+-- 给超级管理员角色添加所有权限
+INSERT INTO `sys_role_permission` (`role_id`, `permission_id`)
+SELECT 1, `permission_id` FROM `sys_permission`;

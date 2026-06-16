@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.SysPermissionMapper">
+    <resultMap id="permissionMap" type="com.example.entity.SysPermission">
+        <id column="permission_id" property="permissionId"/>
+        <result column="permission_name" property="permissionName"/>
+        <result column="permission_code" property="permissionCode"/>
+        <result column="permission_type" property="permissionType"/>
+        <result column="permission_level" property="permissionLevel"/>
+        <result column="description" property="description"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="permissionMap">
+        SELECT * FROM sys_permission ORDER BY permission_type, permission_id
+    </select>
+
+    <select id="findById" resultMap="permissionMap">
+        SELECT * FROM sys_permission WHERE permission_id = #{permissionId}
+    </select>
+
+    <select id="findByRoleId" resultMap="permissionMap">
+        SELECT p.* FROM sys_permission p
+        INNER JOIN sys_role_permission rp ON p.permission_id = rp.permission_id
+        WHERE rp.role_id = #{roleId}
+    </select>
+</mapper>

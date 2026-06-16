@@ -14,4 +14,6 @@ public interface SysRoleMapper {
     void update(SysRole role);
     void deleteById(Integer roleId);
     int countByCode(String roleCode);
+    void deletePermissionsByRoleId(Integer roleId);
+    void insertPermissions(Integer roleId, List<Integer> permissionIds);
 }

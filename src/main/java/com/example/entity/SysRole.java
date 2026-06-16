@@ -1,6 +1,7 @@
 package com.example.entity;
 
 import java.util.Date;
+import java.util.List;
 
 public class SysRole {
     private Integer roleId;
@@ -10,6 +11,8 @@ public class SysRole {
     private Integer status;
     private Date createTime;
     private Date updateTime;
+
+    private List<SysPermission> permissions;
 
     public SysRole() {}
 
@@ -27,4 +30,6 @@ public class SysRole {
     public void setCreateTime(Date createTime) { this.createTime = createTime; }
     public Date getUpdateTime() { return updateTime; }
     public void setUpdateTime(Date updateTime) { this.updateTime = updateTime; }
+    public List<SysPermission> getPermissions() { return permissions; }
+    public void setPermissions(List<SysPermission> permissions) { this.permissions = permissions; }
 }
