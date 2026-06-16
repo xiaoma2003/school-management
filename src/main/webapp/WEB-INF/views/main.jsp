@@ -30,6 +30,7 @@
             <li><a href="<%= ctx %>/main">首页</a></li>
             <li><a href="<%= ctx %>/system/post/list">系统管理</a></li>
             <li><a href="<%= ctx %>/school/grade/list">学校管理</a></li>
+            <li><a href="<%= ctx %>/equipment/list">设备管理</a></li>
         </ul>
     </div>
     <div class="content">

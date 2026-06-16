@@ -32,6 +32,7 @@
             <li><a href="<%= ctx %>/school/grade/list">年级管理</a></li>
             <li><a href="<%= ctx %>/school/class/list">班级管理</a></li>
             <li><a href="<%= ctx %>/school/student/list">学生管理</a></li>
+            <li><a href="<%= ctx %>/equipment/list">设备管理</a></li>
         </ul>
     </div>
     <div class="content">

@@ -84,3 +84,18 @@ CREATE TABLE IF NOT EXISTS `sys_student` (
 
 INSERT INTO `sys_role` (`role_name`, `role_code`, `description`) VALUES ('超级管理员', 'admin', '系统超级管理员');
 INSERT INTO `sys_user` (`username`, `password`, `real_name`, `role_id`) VALUES ('admin', 'e10adc3949ba59abbe56e057f20f883e', '管理员', 1);
+
+-- 设备管理表
+CREATE TABLE IF NOT EXISTS `sys_equipment` (
+    `equipment_id` INT AUTO_INCREMENT PRIMARY KEY,
+    `equipment_no` VARCHAR(50) UNIQUE NOT NULL COMMENT '设备编号',
+    `equipment_name` VARCHAR(100) NOT NULL COMMENT '设备名称',
+    `dept_id` INT COMMENT '所属部门',
+    `class_id` INT COMMENT '所属班级',
+    `status` TINYINT DEFAULT 1 COMMENT '状态: 1=正常, 2=故障',
+    `remark` VARCHAR(500) COMMENT '备注',
+    `create_time` DATETIME DEFAULT CURRENT_TIMESTAMP,
+    `update_time` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (`dept_id`) REFERENCES `sys_dept`(`dept_id`),
+    FOREIGN KEY (`class_id`) REFERENCES `sys_class`(`class_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

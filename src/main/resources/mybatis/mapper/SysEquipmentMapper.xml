@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.SysEquipmentMapper">
+    <resultMap id="equipmentMap" type="com.example.entity.SysEquipment">
+        <id column="equipment_id" property="equipmentId"/>
+        <result column="equipment_no" property="equipmentNo"/>
+        <result column="equipment_name" property="equipmentName"/>
+        <result column="dept_id" property="deptId"/>
+        <result column="class_id" property="classId"/>
+        <result column="status" property="status"/>
+        <result column="remark" property="remark"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="dept_name" property="deptName"/>
+        <result column="class_name" property="className"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="equipmentMap">
+        SELECT e.*, d.dept_name, c.class_name
+        FROM sys_equipment e
+        LEFT JOIN sys_dept d ON e.dept_id = d.dept_id
+        LEFT JOIN sys_class c ON e.class_id = c.class_id
+        ORDER BY e.equipment_id ASC
+    </select>
+
+    <select id="findById" resultMap="equipmentMap">
+        SELECT e.*, d.dept_name, c.class_name
+        FROM sys_equipment e
+        LEFT JOIN sys_dept d ON e.dept_id = d.dept_id
+        LEFT JOIN sys_class c ON e.class_id = c.class_id
+        WHERE e.equipment_id = #{equipmentId}
+    </select>
+
+    <select id="findByEquipmentNo" resultType="com.example.entity.SysEquipment">
+        SELECT * FROM sys_equipment WHERE equipment_no = #{equipmentNo}
+    </select>
+
+    <insert id="insert">
+        INSERT INTO sys_equipment (equipment_no, equipment_name, dept_id, class_id, status, remark)
+        VALUES (#{equipmentNo}, #{equipmentName}, #{deptId}, #{classId}, #{status}, #{remark})
+    </insert>
+
+    <update id="update">
+        UPDATE sys_equipment
+        SET equipment_no=#{equipmentNo}, equipment_name=#{equipmentName},
+            dept_id=#{deptId}, class_id=#{classId}, status=#{status}, remark=#{remark}
+        WHERE equipment_id=#{equipmentId}
+    </update>
+
+    <update id="updateStatus">
+        UPDATE sys_equipment SET status=#{status}, remark=#{remark}
+        WHERE equipment_id=#{equipmentId}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM sys_equipment WHERE equipment_id = #{equipmentId}
+    </delete>
+</mapper>

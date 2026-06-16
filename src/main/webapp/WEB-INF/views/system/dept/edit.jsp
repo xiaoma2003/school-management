@@ -33,6 +33,7 @@
             <li><a href="<%= ctx %>/system/role/list">角色管理</a></li>
             <li><a href="<%= ctx %>/system/user/list">用户管理</a></li>
             <li><a href="<%= ctx %>/school/grade/list">学校管理</a></li>
+            <li><a href="<%= ctx %>/equipment/list">设备管理</a></li>
         </ul>
     </div>
     <div class="content">
