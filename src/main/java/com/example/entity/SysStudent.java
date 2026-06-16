@@ -1,5 +1,7 @@
 package com.example.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class SysStudent {
@@ -7,6 +9,7 @@ public class SysStudent {
     private String studentNo;
     private String studentName;
     private Integer gender;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
     private Integer classId;
     private String phone;
