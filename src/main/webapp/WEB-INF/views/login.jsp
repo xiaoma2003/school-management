@@ -20,7 +20,7 @@
         <% if (request.getParameter("error") != null) { %>
             <div class="error">用户名或密码错误</div>
         <% } %>
-        <form action="/login" method="post">
+        <form action="${pageContext.request.contextPath}/login" method="post">
             <div class="form-group">
                 <label>用户名</label>
                 <input type="text" name="username" required>
