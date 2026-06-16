@@ -6,14 +6,14 @@
     <title>班级管理</title>
     <style>
         body { margin: 0; font-family: Arial, sans-serif; }
-        .sidebar { width: 200px; height: 100vh; background: #2c3e50; float: left; color: white; }
+        .sidebar { position: fixed; top: 0; left: 0; width: 200px; height: 100vh; background: #2c3e50; color: white; overflow-y: auto; }
         .sidebar h2 { text-align: center; padding: 20px; margin: 0; background: #1a252f; }
         .sidebar ul { list-style: none; padding: 0; }
         .sidebar li { padding: 10px 20px; }
         .sidebar li:hover { background: #34495e; }
         .sidebar a { color: white; text-decoration: none; display: block; }
         .sidebar .nav-module { background: #1e88e5; }
-        .content { margin-left: 200px; padding: 20px; }
+        .content { margin-left: 200px; padding: 20px; height: 100vh; overflow-y: auto; height: 100vh; overflow-y: auto; }
         .header { background: #f8f9fa; padding: 15px 20px; border-bottom: 1px solid #e9ecef; }
         .header a { float: right; color: #666; text-decoration: none; }
         .welcome { font-size: 18px; color: #333; }
