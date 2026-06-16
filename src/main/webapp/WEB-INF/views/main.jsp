@@ -1,7 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<% String ctx = request.getContextPath(); %>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>校生通管理系统 - 主界面</title>
+    <link rel="icon" type="image/x-icon" href="<%= ctx %>/favicon.ico">
     <style>
         body { margin: 0; font-family: Arial, sans-serif; }
         .sidebar { width: 200px; height: 100vh; background: #2c3e50; float: left; color: white; }
@@ -24,25 +27,25 @@
     <div class="sidebar">
         <h2>校生通管理系统</h2>
         <ul>
-            <li><a href="/main">首页</a></li>
-            <li><a href="/system/post/list">系统管理</a></li>
-            <li><a href="/school/grade/list">学校管理</a></li>
+            <li><a href="<%= ctx %>/main">首页</a></li>
+            <li><a href="<%= ctx %>/system/post/list">系统管理</a></li>
+            <li><a href="<%= ctx %>/school/grade/list">学校管理</a></li>
         </ul>
     </div>
     <div class="content">
         <div class="header">
             <span class="welcome">欢迎, ${sessionScope.username}</span>
-            <a href="/logout">退出登录</a>
+            <a href="<%= ctx %>/logout">退出登录</a>
         </div>
         <div class="modules">
             <div class="module">
-                <a href="/system/post/list">
+                <a href="<%= ctx %>/system/post/list">
                     <h3>系统管理</h3>
                     <p>用户、角色、部门管理</p>
                 </a>
             </div>
             <div class="module">
-                <a href="/school/grade/list">
+                <a href="<%= ctx %>/school/grade/list">
                     <h3>学校管理</h3>
                     <p>年级、班级、学生管理</p>
                 </a>

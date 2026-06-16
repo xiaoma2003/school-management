@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<% String ctx = request.getContextPath(); %>
 <html>
 <head>
     <title>导入学生</title>
@@ -27,17 +28,17 @@
     <div class="sidebar">
         <h2>校生通管理系统</h2>
         <ul>
-            <li><a href="/main">首页</a></li>
-            <li><a href="/system/post/list">系统管理</a></li>
-            <li><a href="/school/grade/list">年级管理</a></li>
-            <li><a href="/school/class/list">班级管理</a></li>
-            <li><a href="/school/student/list">学生管理</a></li>
+            <li><a href="<%= ctx %>/main">首页</a></li>
+            <li><a href="<%= ctx %>/system/post/list">系统管理</a></li>
+            <li><a href="<%= ctx %>/school/grade/list">年级管理</a></li>
+            <li><a href="<%= ctx %>/school/class/list">班级管理</a></li>
+            <li><a href="<%= ctx %>/school/student/list">学生管理</a></li>
         </ul>
     </div>
     <div class="content">
         <div class="header">
             <span class="welcome">欢迎, ${sessionScope.username}</span>
-            <a href="/logout">退出登录</a>
+            <a href="<%= ctx %>/logout">退出登录</a>
         </div>
         <h2>导入学生</h2>
         <div class="note">
@@ -46,13 +47,13 @@
             2. Excel文件格式：学号、姓名、性别(男/女)、出生日期(yyyy-MM-dd)、班级ID、电话、地址<br>
             3. 第一行为表头，从第二行开始为数据
         </div>
-        <form action="/school/student/import" method="post" enctype="multipart/form-data">
+        <form action="<%= ctx %>/school/student/import" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label>选择Excel文件</label>
                 <input type="file" name="file" accept=".xlsx,.xls" required>
             </div>
             <button type="submit" class="btn">导入</button>
-            <a href="/school/student/list" class="btn btn-cancel">取消</a>
+            <a href="<%= ctx %>/school/student/list" class="btn btn-cancel">取消</a>
         </form>
     </div>
 </body>

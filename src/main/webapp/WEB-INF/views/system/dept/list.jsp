@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<% String ctx = request.getContextPath(); %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
@@ -32,21 +33,21 @@
     <div class="sidebar">
         <h2>校生通管理系统</h2>
         <ul>
-            <li><a href="/main">首页</a></li>
-            <li><a href="/system/post/list">岗位管理</a></li>
-            <li><a href="/system/dept/list">部门管理</a></li>
-            <li><a href="/system/role/list">角色管理</a></li>
-            <li><a href="/system/user/list">用户管理</a></li>
-            <li><a href="/school/grade/list">学校管理</a></li>
+            <li><a href="<%= ctx %>/main">首页</a></li>
+            <li><a href="<%= ctx %>/system/post/list">岗位管理</a></li>
+            <li><a href="<%= ctx %>/system/dept/list">部门管理</a></li>
+            <li><a href="<%= ctx %>/system/role/list">角色管理</a></li>
+            <li><a href="<%= ctx %>/system/user/list">用户管理</a></li>
+            <li><a href="<%= ctx %>/school/grade/list">学校管理</a></li>
         </ul>
     </div>
     <div class="content">
         <div class="header">
             <span class="welcome">欢迎, ${sessionScope.username}</span>
-            <a href="/logout">退出登录</a>
+            <a href="<%= ctx %>/logout">退出登录</a>
         </div>
         <h2>部门管理</h2>
-        <a href="/system/dept/add" class="btn">添加部门</a>
+        <a href="<%= ctx %>/system/dept/add" class="btn">添加部门</a>
         <table>
             <tr>
                 <th>部门名称</th>
@@ -62,8 +63,8 @@
                 <td>${dept.sortOrder}</td>
                 <td><span class="${dept.status == 1 ? 'status-active' : 'status-inactive'}">${dept.status == 1 ? '启用' : '禁用'}</span></td>
                 <td>
-                    <a href="/system/dept/edit/${dept.deptId}" class="btn btn-edit" style="display: inline-block;">编辑</a>
-                    <a href="/system/dept/delete/${dept.deptId}" class="btn btn-danger" style="display: inline-block;" onclick="return confirm('确定删除？')">删除</a>
+                    <a href="<%= ctx %>/system/dept/edit/${dept.deptId}" class="btn btn-edit" style="display: inline-block;">编辑</a>
+                    <a href="<%= ctx %>/system/dept/delete/${dept.deptId}" class="btn btn-danger" style="display: inline-block;" onclick="return confirm('确定删除？')">删除</a>
                 </td>
             </tr>
             </c:forEach>

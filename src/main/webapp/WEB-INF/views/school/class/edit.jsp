@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<% String ctx = request.getContextPath(); %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
@@ -27,20 +28,20 @@
     <div class="sidebar">
         <h2>校生通管理系统</h2>
         <ul>
-            <li><a href="/main">首页</a></li>
-            <li><a href="/system/post/list">系统管理</a></li>
-            <li><a href="/school/grade/list">年级管理</a></li>
-            <li><a href="/school/class/list">班级管理</a></li>
-            <li><a href="/school/student/list">学生管理</a></li>
+            <li><a href="<%= ctx %>/main">首页</a></li>
+            <li><a href="<%= ctx %>/system/post/list">系统管理</a></li>
+            <li><a href="<%= ctx %>/school/grade/list">年级管理</a></li>
+            <li><a href="<%= ctx %>/school/class/list">班级管理</a></li>
+            <li><a href="<%= ctx %>/school/student/list">学生管理</a></li>
         </ul>
     </div>
     <div class="content">
         <div class="header">
             <span class="welcome">欢迎, ${sessionScope.username}</span>
-            <a href="/logout">退出登录</a>
+            <a href="<%= ctx %>/logout">退出登录</a>
         </div>
         <h2>编辑班级</h2>
-        <form action="/school/class/save" method="post">
+        <form action="<%= ctx %>/school/class/save" method="post">
             <input type="hidden" name="classId" value="${clazz.classId}">
             <div class="form-group">
                 <label>班级名称</label>
@@ -71,7 +72,7 @@
                 </select>
             </div>
             <button type="submit" class="btn">保存</button>
-            <a href="/school/class/list" class="btn btn-cancel">取消</a>
+            <a href="<%= ctx %>/school/class/list" class="btn btn-cancel">取消</a>
         </form>
     </div>
 </body>

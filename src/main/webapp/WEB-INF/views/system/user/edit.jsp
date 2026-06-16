@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<% String ctx = request.getContextPath(); %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
@@ -27,21 +28,21 @@
     <div class="sidebar">
         <h2>校生通管理系统</h2>
         <ul>
-            <li><a href="/main">首页</a></li>
-            <li><a href="/system/post/list">岗位管理</a></li>
-            <li><a href="/system/dept/list">部门管理</a></li>
-            <li><a href="/system/role/list">角色管理</a></li>
-            <li><a href="/system/user/list">用户管理</a></li>
-            <li><a href="/school/grade/list">学校管理</a></li>
+            <li><a href="<%= ctx %>/main">首页</a></li>
+            <li><a href="<%= ctx %>/system/post/list">岗位管理</a></li>
+            <li><a href="<%= ctx %>/system/dept/list">部门管理</a></li>
+            <li><a href="<%= ctx %>/system/role/list">角色管理</a></li>
+            <li><a href="<%= ctx %>/system/user/list">用户管理</a></li>
+            <li><a href="<%= ctx %>/school/grade/list">学校管理</a></li>
         </ul>
     </div>
     <div class="content">
         <div class="header">
             <span class="welcome">欢迎, ${sessionScope.username}</span>
-            <a href="/logout">退出登录</a>
+            <a href="<%= ctx %>/logout">退出登录</a>
         </div>
         <h2>编辑用户</h2>
-        <form action="/system/user/save" method="post">
+        <form action="<%= ctx %>/system/user/save" method="post">
             <input type="hidden" name="userId" value="${user.userId}">
             <div class="form-group">
                 <label>用户名</label>
@@ -94,7 +95,7 @@
                 </select>
             </div>
             <button type="submit" class="btn">保存</button>
-            <a href="/system/user/list" class="btn btn-cancel">取消</a>
+            <a href="<%= ctx %>/system/user/list" class="btn btn-cancel">取消</a>
         </form>
     </div>
 </body>
