@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface SysUserService {
     List<SysUser> findAll();
+    List<SysUser> search(String username, String realName);
     SysUser findById(Integer userId);
     SysUser findByUsername(String username);
     void save(SysUser user);

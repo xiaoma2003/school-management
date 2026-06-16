@@ -50,6 +50,12 @@
             <a href="<%= ctx %>/logout">退出登录</a>
         </div>
         <h2>用户管理</h2>
+        <form action="<%= ctx %>/system/user/list" method="get" style="margin: 15px 0;">
+            <input type="text" name="username" placeholder="请输入用户名" style="width: 200px; padding: 8px; border: 1px solid #ddd;" value="<%= request.getParameter("username") == null ? "" : request.getParameter("username") %>"/>
+            <input type="text" name="realName" placeholder="请输入真实姓名" style="width: 200px; padding: 8px; border: 1px solid #ddd; margin-left: 10px;" value="<%= request.getParameter("realName") == null ? "" : request.getParameter("realName") %>"/>
+            <button type="submit" class="btn">搜索</button>
+            <button type="reset" class="btn" style="margin-left:10px; background: #6c757d;">重置</button>
+        </form>
         <a href="<%= ctx %>/system/user/add" class="btn">添加用户</a>
         <table>
             <tr>

@@ -20,12 +20,21 @@ public class SysRoleController {
     private SysRoleService roleService;
 
     @GetMapping("/list")
-    public String list(Model model, HttpSession session) {
+    public String list(Model model, HttpSession session,
+                       @RequestParam(required = false) String roleName,
+                       @RequestParam(required = false) String roleCode) {
         if (session.getAttribute("username") == null) {
             return "redirect:/login";
         }
-        List<SysRole> roles = roleService.findAll();
+        List<SysRole> roles;
+        if ((roleName != null && !roleName.isEmpty()) || (roleCode != null && !roleCode.isEmpty())) {
+            roles = roleService.search(roleName, roleCode);
+        } else {
+            roles = roleService.findAll();
+        }
         model.addAttribute("roles", roles);
+        model.addAttribute("roleName", roleName);
+        model.addAttribute("roleCode", roleCode);
         return "system/role/list";
     }
 

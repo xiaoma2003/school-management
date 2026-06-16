@@ -2,6 +2,7 @@ package com.example.mapper;
 
 import com.example.entity.SysEquipment;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -14,4 +15,5 @@ public interface SysEquipmentMapper {
     void update(SysEquipment equipment);
     void deleteById(Integer equipmentId);
     void updateStatus(SysEquipment equipment);
+    List<SysEquipment> search(@Param("keyword") String keyword, @Param("status") Integer status);
 }

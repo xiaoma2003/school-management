@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface SysRoleService {
     List<SysRole> findAll();
+    List<SysRole> search(String roleName, String roleCode);
     SysRole findById(Integer roleId);
     SysRole findByCode(String roleCode);
     void save(SysRole role, List<Integer> permissionIds);

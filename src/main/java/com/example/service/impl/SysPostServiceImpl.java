@@ -20,6 +20,11 @@ public class SysPostServiceImpl implements SysPostService {
     }
 
     @Override
+    public List<SysPost> search(String postName, String postCode) {
+        return postMapper.search(postName, postCode);
+    }
+
+    @Override
     public SysPost findById(Integer postId) {
         return postMapper.findById(postId);
     }

@@ -26,6 +26,22 @@
         LEFT JOIN sys_role r ON u.role_id = r.role_id 
         ORDER BY u.user_id ASC
     </select>
+    <select id="search" resultMap="userMap">
+        SELECT u.*, d.dept_name, p.post_name, r.role_name
+        FROM sys_user u
+        LEFT JOIN sys_dept d ON u.dept_id = d.dept_id
+        LEFT JOIN sys_post p ON u.post_id = p.post_id
+        LEFT JOIN sys_role r ON u.role_id = r.role_id
+        <where>
+            <if test="username != null and username != ''">
+                AND u.username LIKE CONCAT('%', #{username}, '%')
+            </if>
+            <if test="realName != null and realName != ''">
+                AND u.real_name LIKE CONCAT('%', #{realName}, '%')
+            </if>
+        </where>
+        ORDER BY u.user_id ASC
+    </select>
     <select id="findById" resultMap="userMap">
         SELECT u.*, d.dept_name, p.post_name, r.role_name 
         FROM sys_user u 

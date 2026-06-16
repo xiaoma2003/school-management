@@ -9,13 +9,25 @@
     <select id="findById" resultType="com.example.entity.SysGrade">
         SELECT * FROM sys_grade WHERE grade_id = #{gradeId}
     </select>
+    <select id="search" resultType="com.example.entity.SysGrade">
+        SELECT * FROM sys_grade
+        <where>
+            <if test="gradeName != null and gradeName != ''">
+                AND grade_name LIKE CONCAT('%', #{gradeName}, '%')
+            </if>
+            <if test="remark != null and remark != ''">
+                AND remark LIKE CONCAT('%', #{remark}, '%')
+            </if>
+        </where>
+        ORDER BY sort_order ASC
+    </select>
     <insert id="insert">
-        INSERT INTO sys_grade (grade_name, sort_order, status)
-        VALUES (#{gradeName}, #{sortOrder}, #{status})
+        INSERT INTO sys_grade (grade_name, sort_order, status, remark)
+        VALUES (#{gradeName}, #{sortOrder}, #{status}, #{remark})
     </insert>
     <update id="update">
-        UPDATE sys_grade SET grade_name=#{gradeName}, sort_order=#{sortOrder}, 
-            status=#{status} WHERE grade_id=#{gradeId}
+        UPDATE sys_grade SET grade_name=#{gradeName}, sort_order=#{sortOrder},
+            status=#{status}, remark=#{remark} WHERE grade_id=#{gradeId}
     </update>
     <delete id="deleteById">
         DELETE FROM sys_grade WHERE grade_id = #{gradeId}

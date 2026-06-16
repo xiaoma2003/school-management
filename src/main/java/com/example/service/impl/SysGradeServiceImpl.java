@@ -38,4 +38,9 @@ public class SysGradeServiceImpl implements SysGradeService {
     public void deleteById(Integer gradeId) {
         gradeMapper.deleteById(gradeId);
     }
+
+    @Override
+    public List<SysGrade> search(String gradeName, String remark) {
+        return gradeMapper.search(gradeName, remark);
+    }
 }

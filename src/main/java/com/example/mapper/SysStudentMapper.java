@@ -2,6 +2,7 @@ package com.example.mapper;
 
 import com.example.entity.SysStudent;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -16,4 +17,5 @@ public interface SysStudentMapper {
     void deleteById(Integer studentId);
     int countByStudentNo(String studentNo);
     void batchInsert(List<SysStudent> students);
+    List<SysStudent> search(@Param("studentNo") String studentNo, @Param("studentName") String studentName);
 }

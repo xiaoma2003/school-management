@@ -18,12 +18,21 @@ public class SysPostController {
     private SysPostService postService;
 
     @GetMapping("/list")
-    public String list(Model model, HttpSession session) {
+    public String list(Model model, HttpSession session,
+                       @RequestParam(required = false) String postName,
+                       @RequestParam(required = false) String postCode) {
         if (session.getAttribute("username") == null) {
             return "redirect:/login";
         }
-        List<SysPost> posts = postService.findAll();
+        List<SysPost> posts;
+        if ((postName != null && !postName.isEmpty()) || (postCode != null && !postCode.isEmpty())) {
+            posts = postService.search(postName, postCode);
+        } else {
+            posts = postService.findAll();
+        }
         model.addAttribute("posts", posts);
+        model.addAttribute("postName", postName);
+        model.addAttribute("postCode", postCode);
         return "system/post/list";
     }
 

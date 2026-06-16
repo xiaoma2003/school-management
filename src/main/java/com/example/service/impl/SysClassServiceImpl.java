@@ -43,4 +43,9 @@ public class SysClassServiceImpl implements SysClassService {
     public void deleteById(Integer classId) {
         classMapper.deleteById(classId);
     }
+
+    @Override
+    public List<SysClass> search(String className, Integer gradeId) {
+        return classMapper.search(className, gradeId);
+    }
 }

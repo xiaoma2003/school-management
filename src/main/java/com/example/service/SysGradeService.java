@@ -10,4 +10,5 @@ public interface SysGradeService {
     void save(SysGrade grade);
     void update(SysGrade grade);
     void deleteById(Integer gradeId);
+    List<SysGrade> search(String gradeName, String remark);
 }

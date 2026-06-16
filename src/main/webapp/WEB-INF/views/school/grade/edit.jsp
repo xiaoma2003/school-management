@@ -60,6 +60,10 @@
                     <option value="0" ${grade.status == 0 ? 'selected' : ''}>禁用</option>
                 </select>
             </div>
+            <div class="form-group">
+                <label>备注</label>
+                <textarea name="remark" rows="3" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">${grade.remark}</textarea>
+            </div>
             <button type="submit" class="btn">保存</button>
             <a href="<%= ctx %>/school/grade/list" class="btn btn-cancel">取消</a>
         </form>

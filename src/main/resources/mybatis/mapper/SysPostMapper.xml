@@ -6,6 +6,18 @@
     <select id="findAll" resultType="com.example.entity.SysPost">
         SELECT * FROM sys_post ORDER BY sort_order ASC
     </select>
+    <select id="search" resultType="com.example.entity.SysPost">
+        SELECT * FROM sys_post
+        <where>
+            <if test="postName != null and postName != ''">
+                AND post_name LIKE CONCAT('%', #{postName}, '%')
+            </if>
+            <if test="postCode != null and postCode != ''">
+                AND post_code LIKE CONCAT('%', #{postCode}, '%')
+            </if>
+        </where>
+        ORDER BY sort_order ASC
+    </select>
     <select id="findById" resultType="com.example.entity.SysPost">
         SELECT * FROM sys_post WHERE post_id = #{postId}
     </select>

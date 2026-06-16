@@ -26,6 +26,11 @@ public class SysRoleServiceImpl implements SysRoleService {
     }
 
     @Override
+    public List<SysRole> search(String roleName, String roleCode) {
+        return roleMapper.search(roleName, roleCode);
+    }
+
+    @Override
     public SysRole findById(Integer roleId) {
         return roleMapper.findById(roleId);
     }

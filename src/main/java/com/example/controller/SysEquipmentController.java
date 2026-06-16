@@ -28,12 +28,21 @@ public class SysEquipmentController {
     private SysClassService classService;
 
     @GetMapping("/list")
-    public String list(Model model, HttpSession session) {
+    public String list(Model model, HttpSession session,
+                       @RequestParam(required = false) String keyword,
+                       @RequestParam(required = false) Integer status) {
         if (session.getAttribute("username") == null) {
             return "redirect:/login";
         }
-        List<SysEquipment> equipments = equipmentService.findAll();
+        List<SysEquipment> equipments;
+        if ((keyword != null && !keyword.isEmpty()) || status != null) {
+            equipments = equipmentService.search(keyword, status);
+        } else {
+            equipments = equipmentService.findAll();
+        }
         model.addAttribute("equipments", equipments);
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("status", status);
         return "equipment/list";
     }
 

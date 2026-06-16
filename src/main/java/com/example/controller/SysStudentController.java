@@ -23,12 +23,23 @@ public class SysStudentController {
     private SysClassService classService;
 
     @GetMapping("/list")
-    public String list(Model model, HttpSession session) {
+    public String list(@RequestParam(required = false) String studentNo,
+                       @RequestParam(required = false) String studentName,
+                       Model model, HttpSession session) {
         if (session.getAttribute("username") == null) {
             return "redirect:/login";
         }
-        List<SysStudent> students = studentService.findAll();
+        List<SysStudent> students;
+        boolean hasSearch = (studentNo != null && !studentNo.isEmpty()) ||
+                            (studentName != null && !studentName.isEmpty());
+        if (hasSearch) {
+            students = studentService.search(studentNo, studentName);
+        } else {
+            students = studentService.findAll();
+        }
         model.addAttribute("students", students);
+        model.addAttribute("studentNo", studentNo);
+        model.addAttribute("studentName", studentName);
         return "school/student/list";
     }
 

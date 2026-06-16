@@ -2,6 +2,7 @@ package com.example.mapper;
 
 import com.example.entity.SysClass;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -13,4 +14,5 @@ public interface SysClassMapper {
     void insert(SysClass clazz);
     void update(SysClass clazz);
     void deleteById(Integer classId);
+    List<SysClass> search(@Param("className") String className, @Param("gradeId") Integer gradeId);
 }

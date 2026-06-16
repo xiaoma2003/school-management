@@ -20,6 +20,11 @@ public class SysDeptServiceImpl implements SysDeptService {
     }
 
     @Override
+    public List<SysDept> search(String deptName, String deptCode) {
+        return deptMapper.search(deptName, deptCode);
+    }
+
+    @Override
     public SysDept findById(Integer deptId) {
         return deptMapper.findById(deptId);
     }

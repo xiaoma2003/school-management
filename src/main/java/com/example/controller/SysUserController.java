@@ -30,12 +30,21 @@ public class SysUserController {
     private SysRoleService roleService;
 
     @GetMapping("/list")
-    public String list(Model model, HttpSession session) {
+    public String list(Model model, HttpSession session,
+                       @RequestParam(required = false) String username,
+                       @RequestParam(required = false) String realName) {
         if (session.getAttribute("username") == null) {
             return "redirect:/login";
         }
-        List<SysUser> users = userService.findAll();
+        List<SysUser> users;
+        if ((username != null && !username.isEmpty()) || (realName != null && !realName.isEmpty())) {
+            users = userService.search(username, realName);
+        } else {
+            users = userService.findAll();
+        }
         model.addAttribute("users", users);
+        model.addAttribute("username", username);
+        model.addAttribute("realName", realName);
         return "system/user/list";
     }
 

@@ -22,6 +22,11 @@ public class SysUserServiceImpl implements SysUserService {
     }
 
     @Override
+    public List<SysUser> search(String username, String realName) {
+        return userMapper.search(username, realName);
+    }
+
+    @Override
     public SysUser findById(Integer userId) {
         return userMapper.findById(userId);
     }

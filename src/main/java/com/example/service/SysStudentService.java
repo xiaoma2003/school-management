@@ -16,4 +16,5 @@ public interface SysStudentService {
     boolean existsByStudentNo(String studentNo);
     void importStudents(MultipartFile file);
     int batchInsert(List<SysStudent> students);
+    List<SysStudent> search(String studentNo, String studentName);
 }

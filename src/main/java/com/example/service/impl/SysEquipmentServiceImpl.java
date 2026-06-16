@@ -52,4 +52,9 @@ public class SysEquipmentServiceImpl implements SysEquipmentService {
         equipment.setRemark(remark);
         equipmentMapper.updateStatus(equipment);
     }
+
+    @Override
+    public List<SysEquipment> search(String keyword, Integer status) {
+        return equipmentMapper.search(keyword, status);
+    }
 }

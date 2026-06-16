@@ -11,4 +11,5 @@ public interface SysClassService {
     void save(SysClass clazz);
     void update(SysClass clazz);
     void deleteById(Integer classId);
+    List<SysClass> search(String className, Integer gradeId);
 }

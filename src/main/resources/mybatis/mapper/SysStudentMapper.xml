@@ -36,6 +36,21 @@
     <select id="findByClassId" resultType="com.example.entity.SysStudent">
         SELECT * FROM sys_student WHERE class_id = #{classId} ORDER BY student_no ASC
     </select>
+    <select id="search" resultMap="studentMap">
+        SELECT s.*, c.class_name, g.grade_name
+        FROM sys_student s
+        LEFT JOIN sys_class c ON s.class_id = c.class_id
+        LEFT JOIN sys_grade g ON c.grade_id = g.grade_id
+        <where>
+            <if test="studentNo != null and studentNo != ''">
+                AND s.student_no LIKE CONCAT('%', #{studentNo}, '%')
+            </if>
+            <if test="studentName != null and studentName != ''">
+                AND s.student_name LIKE CONCAT('%', #{studentName}, '%')
+            </if>
+        </where>
+        ORDER BY s.student_no ASC
+    </select>
     <insert id="insert">
         INSERT INTO sys_student (student_no, student_name, gender, birthday, class_id, phone, address, status)
         VALUES (#{studentNo}, #{studentName}, #{gender}, #{birthday}, #{classId}, #{phone}, #{address}, #{status})

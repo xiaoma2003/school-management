@@ -18,12 +18,21 @@ public class SysDeptController {
     private SysDeptService deptService;
 
     @GetMapping("/list")
-    public String list(Model model, HttpSession session) {
+    public String list(Model model, HttpSession session,
+                       @RequestParam(required = false) String deptName,
+                       @RequestParam(required = false) String deptCode) {
         if (session.getAttribute("username") == null) {
             return "redirect:/login";
         }
-        List<SysDept> depts = deptService.findAll();
+        List<SysDept> depts;
+        if ((deptName != null && !deptName.isEmpty()) || (deptCode != null && !deptCode.isEmpty())) {
+            depts = deptService.search(deptName, deptCode);
+        } else {
+            depts = deptService.findAll();
+        }
         model.addAttribute("depts", depts);
+        model.addAttribute("deptName", deptName);
+        model.addAttribute("deptCode", deptCode);
         return "system/dept/list";
     }
 

@@ -6,6 +6,18 @@
     <select id="findAll" resultType="com.example.entity.SysDept">
         SELECT * FROM sys_dept ORDER BY sort_order ASC
     </select>
+    <select id="search" resultType="com.example.entity.SysDept">
+        SELECT * FROM sys_dept
+        <where>
+            <if test="deptName != null and deptName != ''">
+                AND dept_name LIKE CONCAT('%', #{deptName}, '%')
+            </if>
+            <if test="deptCode != null and deptCode != ''">
+                AND dept_code LIKE CONCAT('%', #{deptCode}, '%')
+            </if>
+        </where>
+        ORDER BY sort_order ASC
+    </select>
     <select id="findById" resultType="com.example.entity.SysDept">
         SELECT * FROM sys_dept WHERE dept_id = #{deptId}
     </select>

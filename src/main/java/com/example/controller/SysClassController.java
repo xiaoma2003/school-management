@@ -22,12 +22,23 @@ public class SysClassController {
     private SysGradeService gradeService;
 
     @GetMapping("/list")
-    public String list(Model model, HttpSession session) {
+    public String list(@RequestParam(required = false) String className,
+                       @RequestParam(required = false) Integer gradeId,
+                       Model model, HttpSession session) {
         if (session.getAttribute("username") == null) {
             return "redirect:/login";
         }
-        List<SysClass> classes = classService.findAll();
+        List<SysClass> classes;
+        boolean hasSearch = (className != null && !className.isEmpty()) || gradeId != null;
+        if (hasSearch) {
+            classes = classService.search(className, gradeId);
+        } else {
+            classes = classService.findAll();
+        }
         model.addAttribute("classes", classes);
+        model.addAttribute("grades", gradeService.findAll());
+        model.addAttribute("className", className);
+        model.addAttribute("gradeId", gradeId);
         return "school/class/list";
     }
 

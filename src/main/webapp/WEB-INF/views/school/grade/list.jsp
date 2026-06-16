@@ -50,11 +50,22 @@
         </div>
         <h2>年级管理</h2>
         <a href="<%= ctx %>/school/grade/add" class="btn">添加年级</a>
+        <form action="<%= ctx %>/school/grade/list" method="get" style="margin: 15px 0;">
+            <input type="text" name="gradeName" placeholder="请输入年级名称"
+                   value="<%= request.getParameter("gradeName") == null ? "" : request.getParameter("gradeName") %>"
+                   style="width: 200px; padding: 8px; margin-right: 10px;">
+            <input type="text" name="remark" placeholder="请输入备注信息"
+                   value="<%= request.getParameter("remark") == null ? "" : request.getParameter("remark") %>"
+                   style="width: 200px; padding: 8px; margin-right: 10px;">
+            <button type="submit" class="btn">搜索</button>
+            <button type="reset" class="btn btn-cancel" style="margin-left:10px; background:#dc3545; color:white; padding:8px 16px; border:none; border-radius:4px; cursor:pointer;">重置</button>
+        </form>
         <table>
             <tr>
                 <th>年级名称</th>
                 <th>排序</th>
                 <th>状态</th>
+                <th>备注</th>
                 <th>操作</th>
             </tr>
             <c:forEach items="${grades}" var="grade">
@@ -62,6 +73,7 @@
                 <td>${grade.gradeName}</td>
                 <td>${grade.sortOrder}</td>
                 <td><span class="${grade.status == 1 ? 'status-active' : 'status-inactive'}">${grade.status == 1 ? '启用' : '禁用'}</span></td>
+                <td>${grade.remark}</td>
                 <td>
                     <a href="<%= ctx %>/school/grade/edit/${grade.gradeId}" class="btn btn-edit" style="display: inline-block;">编辑</a>
                     <a href="<%= ctx %>/school/grade/delete/${grade.gradeId}" class="btn btn-danger" style="display: inline-block;" onclick="return confirm('确定删除？')">删除</a>

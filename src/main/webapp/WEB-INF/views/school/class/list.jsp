@@ -50,6 +50,19 @@
         </div>
         <h2>班级管理</h2>
         <a href="<%= ctx %>/school/class/add" class="btn">添加班级</a>
+        <form action="<%= ctx %>/school/class/list" method="get" style="margin: 15px 0;">
+            <input type="text" name="className" placeholder="请输入班级名称"
+                   value="<%= request.getParameter("className") == null ? "" : request.getParameter("className") %>"
+                   style="width: 200px; padding: 8px; margin-right: 10px;">
+            <select name="gradeId" style="width: 200px; padding: 8px; margin-right: 10px;">
+                <option value="">请选择年级</option>
+                <c:forEach items="${grades}" var="grade">
+                    <option value="${grade.gradeId}" ${param.gradeId != null and param.gradeId == grade.gradeId ? 'selected' : ''}>${grade.gradeName}</option>
+                </c:forEach>
+            </select>
+            <button type="submit" class="btn">搜索</button>
+            <button type="reset" class="btn btn-cancel" style="margin-left:10px; background:#dc3545; color:white; padding:8px 16px; border:none; border-radius:4px; cursor:pointer;">重置</button>
+        </form>
         <table>
             <tr>
                 <th>班级名称</th>

@@ -113,6 +113,11 @@ public class SysStudentServiceImpl implements SysStudentService {
         return students.size();
     }
 
+    @Override
+    public List<SysStudent> search(String studentNo, String studentName) {
+        return studentMapper.search(studentNo, studentName);
+    }
+
     private String getCellStringValue(Cell cell) {
         if (cell == null) return null;
         switch (cell.getCellType()) {

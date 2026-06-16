@@ -56,6 +56,18 @@
             <a href="<%= ctx %>/logout">退出登录</a>
         </div>
         <h2>设备管理</h2>
+        <form action="<%= ctx %>/equipment/list" method="get" style="margin: 15px 0;">
+            <input type="text" name="keyword" placeholder="请输入设备编号或名称"
+                   value="<%= request.getParameter("keyword") == null ? "" : request.getParameter("keyword") %>"
+                   style="width: 200px; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+            <select name="status" style="width: 200px; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                <option value="" <%= (request.getParameter("status") == null || request.getParameter("status").equals("")) ? "selected" : "" %>>全部</option>
+                <option value="1" <%= (request.getParameter("status") != null && request.getParameter("status").equals("1")) ? "selected" : "" %>>正常</option>
+                <option value="2" <%= (request.getParameter("status") != null && request.getParameter("status").equals("2")) ? "selected" : "" %>>故障</option>
+            </select>
+            <button type="submit" class="btn">搜索</button>
+            <button type="button" class="btn btn-edit" onclick="location.href='<%= ctx %>/equipment/list'">重置</button>
+        </form>
         <a href="<%= ctx %>/equipment/add" class="btn">添加设备</a>
         <table>
             <tr>

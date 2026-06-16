@@ -18,12 +18,23 @@ public class SysGradeController {
     private SysGradeService gradeService;
 
     @GetMapping("/list")
-    public String list(Model model, HttpSession session) {
+    public String list(@RequestParam(required = false) String gradeName,
+                       @RequestParam(required = false) String remark,
+                       Model model, HttpSession session) {
         if (session.getAttribute("username") == null) {
             return "redirect:/login";
         }
-        List<SysGrade> grades = gradeService.findAll();
+        List<SysGrade> grades;
+        boolean hasSearch = (gradeName != null && !gradeName.isEmpty()) ||
+                            (remark != null && !remark.isEmpty());
+        if (hasSearch) {
+            grades = gradeService.search(gradeName, remark);
+        } else {
+            grades = gradeService.findAll();
+        }
         model.addAttribute("grades", grades);
+        model.addAttribute("gradeName", gradeName);
+        model.addAttribute("remark", remark);
         return "school/grade/list";
     }
 

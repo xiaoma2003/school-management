@@ -48,6 +48,12 @@
             <a href="<%= ctx %>/logout">退出登录</a>
         </div>
         <h2>角色管理</h2>
+        <form action="<%= ctx %>/system/role/list" method="get" style="margin: 15px 0;">
+            <input type="text" name="roleName" placeholder="请输入角色名称" style="width: 200px; padding: 8px; border: 1px solid #ddd;" value="<%= request.getParameter("roleName") == null ? "" : request.getParameter("roleName") %>"/>
+            <input type="text" name="roleCode" placeholder="请输入角色编码" style="width: 200px; padding: 8px; border: 1px solid #ddd; margin-left: 10px;" value="<%= request.getParameter("roleCode") == null ? "" : request.getParameter("roleCode") %>"/>
+            <button type="submit" class="btn">搜索</button>
+            <button type="reset" class="btn" style="margin-left:10px; background: #6c757d;">重置</button>
+        </form>
         <a href="<%= ctx %>/system/role/add" class="btn">添加角色</a>
         <table>
             <tr>
