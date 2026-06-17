@@ -51,10 +51,30 @@ public class SysRoleController {
     @PostMapping("/save")
     public String save(SysRole role,
                       @RequestParam(value = "permissionIds", required = false) List<Integer> permissionIds,
+                      Model model,
                       HttpSession session) {
         if (session.getAttribute("username") == null) {
             return "redirect:/login";
         }
+        
+        // 校验角色编码是否重复
+        SysRole existingRole = roleService.findByCode(role.getRoleCode());
+        if (existingRole != null && !existingRole.getRoleId().equals(role.getRoleId())) {
+            model.addAttribute("error", "角色编码 '" + role.getRoleCode() + "' 已存在，请使用其他编码");
+            model.addAttribute("role", role);
+            model.addAttribute("permissions", roleService.findAllPermissions());
+            if (role.getRoleId() == null) {
+                return "system/role/add";
+            } else {
+                List<Integer> selectedPermissionIds = new ArrayList<>();
+                if (permissionIds != null) {
+                    selectedPermissionIds.addAll(permissionIds);
+                }
+                model.addAttribute("selectedPermissionIds", selectedPermissionIds);
+                return "system/role/edit";
+            }
+        }
+        
         if (role.getRoleId() == null) {
             roleService.save(role, permissionIds);
         } else {

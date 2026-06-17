@@ -30,6 +30,7 @@
         .permission-item { margin-bottom: 10px; }
         .permission-item label { font-weight: normal !important; }
         .permission-desc { color: #666; font-size: 12px; margin-left: 20px; }
+        .error-msg { background: #f8d7da; color: #721c24; padding: 10px 15px; border-radius: 4px; margin-bottom: 15px; border: 1px solid #f5c6cb; }
     </style>
 </head>
 <body>
@@ -48,14 +49,17 @@
             <a href="<%= ctx %>/logout">退出登录</a>
         </div>
         <h2>添加角色</h2>
+        <c:if test="${not empty error}">
+            <div class="error-msg">${error}</div>
+        </c:if>
         <form action="<%= ctx %>/system/role/save" method="post">
             <div class="form-group">
                 <label>角色名称<span class="required">*</span></label>
-                <input type="text" name="roleName" required placeholder="请输入角色名称">
+                <input type="text" name="roleName" value="${role.roleName}" required placeholder="请输入角色名称">
             </div>
             <div class="form-group">
                 <label>角色编码<span class="required">*</span></label>
-                <input type="text" name="roleCode" required placeholder="请输入角色编码">
+                <input type="text" name="roleCode" value="${role.roleCode}" required placeholder="请输入角色编码">
             </div>
             <div class="form-group">
                 <label>描述</label>

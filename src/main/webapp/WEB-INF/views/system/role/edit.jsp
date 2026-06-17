@@ -30,6 +30,7 @@
         .permission-item { margin-bottom: 10px; }
         .permission-item label { font-weight: normal !important; }
         .permission-desc { color: #666; font-size: 12px; margin-left: 20px; }
+        .error-msg { background: #f8d7da; color: #721c24; padding: 10px 15px; border-radius: 4px; margin-bottom: 15px; border: 1px solid #f5c6cb; }
     </style>
 </head>
 <body>
@@ -48,6 +49,9 @@
             <a href="<%= ctx %>/logout">退出登录</a>
         </div>
         <h2>编辑角色</h2>
+        <c:if test="${not empty error}">
+            <div class="error-msg">${error}</div>
+        </c:if>
         <form action="<%= ctx %>/system/role/save" method="post">
             <input type="hidden" name="roleId" value="${role.roleId}">
             <div class="form-group">
