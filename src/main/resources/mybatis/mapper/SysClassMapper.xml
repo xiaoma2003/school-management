@@ -50,4 +50,7 @@
     <delete id="deleteById">
         DELETE FROM sys_class WHERE class_id = #{classId}
     </delete>
+    <select id="countByGradeId" resultType="int">
+        SELECT COUNT(*) FROM sys_class WHERE grade_id = #{gradeId}
+    </select>
 </mapper>

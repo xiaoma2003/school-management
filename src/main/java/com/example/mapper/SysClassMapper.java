@@ -15,4 +15,5 @@ public interface SysClassMapper {
     void update(SysClass clazz);
     void deleteById(Integer classId);
     List<SysClass> search(@Param("className") String className, @Param("gradeId") Integer gradeId);
+    int countByGradeId(@Param("gradeId") Integer gradeId);
 }

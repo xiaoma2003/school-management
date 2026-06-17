@@ -29,6 +29,7 @@
         .status-active { color: green; }
         .status-inactive { color: red; }
         .required { color: #dc3545; margin-left: 4px; }
+        .error-msg { background: #dc3545; color: white; padding: 10px 15px; border-radius: 4px; margin-bottom: 15px; }
     </style>
 </head>
 <body>
@@ -56,6 +57,9 @@
             <a href="<%= ctx %>/logout">退出登录</a>
         </div>
         <h2>年级管理</h2>
+        <c:if test="${not empty error}">
+            <div class="error-msg">${error}</div>
+        </c:if>
         <c:if test="${sessionScope.permissionCodes != null && sessionScope.permissionCodes.contains('school:manage')}">
             <a href="<%= ctx %>/school/grade/add" class="btn">添加年级</a>
         </c:if>

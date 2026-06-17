@@ -48,4 +48,9 @@ public class SysClassServiceImpl implements SysClassService {
     public List<SysClass> search(String className, Integer gradeId) {
         return classMapper.search(className, gradeId);
     }
+
+    @Override
+    public int countByGradeId(Integer gradeId) {
+        return classMapper.countByGradeId(gradeId);
+    }
 }

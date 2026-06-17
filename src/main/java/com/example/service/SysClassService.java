@@ -12,4 +12,5 @@ public interface SysClassService {
     void update(SysClass clazz);
     void deleteById(Integer classId);
     List<SysClass> search(String className, Integer gradeId);
+    int countByGradeId(Integer gradeId);
 }
