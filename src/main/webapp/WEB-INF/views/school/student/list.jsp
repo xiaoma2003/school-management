@@ -70,7 +70,7 @@
                    value="<%= request.getParameter("studentName") == null ? "" : request.getParameter("studentName") %>"
                    style="width: 200px; padding: 8px; margin-right: 10px;">
             <button type="submit" class="btn">搜索</button>
-            <button type="reset" class="btn btn-cancel" style="margin-left:10px; background:#dc3545; color:white; padding:8px 16px; border:none; border-radius:4px; cursor:pointer;">重置</button>
+            <button type="button" class="btn btn-cancel" style="margin-left:10px; background:#dc3545; color:white; padding:8px 16px; border:none; border-radius:4px; cursor:pointer;" onclick="window.location.href='<%= ctx %>/school/student/list'">重置</button>
         </form>
         <table>
             <tr>

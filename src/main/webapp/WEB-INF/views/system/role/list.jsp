@@ -66,7 +66,7 @@
             <input type="text" name="roleName" placeholder="请输入角色名称" style="width: 200px; padding: 8px; border: 1px solid #ddd;" value="<%= request.getParameter("roleName") == null ? "" : request.getParameter("roleName") %>"/>
             <input type="text" name="roleCode" placeholder="请输入角色编码" style="width: 200px; padding: 8px; border: 1px solid #ddd; margin-left: 10px;" value="<%= request.getParameter("roleCode") == null ? "" : request.getParameter("roleCode") %>"/>
             <button type="submit" class="btn">搜索</button>
-            <button type="reset" class="btn" style="margin-left:10px; background: #6c757d;">重置</button>
+            <button type="button" class="btn" style="margin-left:10px; background: #6c757d;" onclick="window.location.href='<%= ctx %>/system/role/list'">重置</button>
         </form>
         <c:if test="${sessionScope.permissionCodes != null && sessionScope.permissionCodes.contains('system:manage')}">
             <a href="<%= ctx %>/system/role/add" class="btn">添加角色</a>

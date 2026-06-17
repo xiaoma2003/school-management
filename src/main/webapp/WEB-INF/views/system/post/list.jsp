@@ -71,7 +71,7 @@
             <input type="text" name="postName" placeholder="请输入岗位名称" style="width: 200px; padding: 8px; border: 1px solid #ddd;" value="<%= request.getParameter("postName") == null ? "" : request.getParameter("postName") %>"/>
             <input type="text" name="postCode" placeholder="请输入岗位编码" style="width: 200px; padding: 8px; border: 1px solid #ddd; margin-left: 10px;" value="<%= request.getParameter("postCode") == null ? "" : request.getParameter("postCode") %>"/>
             <button type="submit" class="btn">搜索</button>
-            <button type="reset" class="btn" style="margin-left:10px; background: #6c757d;">重置</button>
+            <button type="button" class="btn" style="margin-left:10px; background: #6c757d;" onclick="window.location.href='<%= ctx %>/system/post/list'">重置</button>
         </form>
         <c:if test="${sessionScope.permissionCodes != null && sessionScope.permissionCodes.contains('system:manage')}">
             <a href="<%= ctx %>/system/post/add" class="btn">添加岗位</a>

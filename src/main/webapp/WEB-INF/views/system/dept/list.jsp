@@ -65,7 +65,7 @@
             <input type="text" name="deptName" placeholder="请输入部门名称" style="width: 200px; padding: 8px; border: 1px solid #ddd;" value="<%= request.getParameter("deptName") == null ? "" : request.getParameter("deptName") %>"/>
             <input type="text" name="deptCode" placeholder="请输入部门编码" style="width: 200px; padding: 8px; border: 1px solid #ddd; margin-left: 10px;" value="<%= request.getParameter("deptCode") == null ? "" : request.getParameter("deptCode") %>"/>
             <button type="submit" class="btn">搜索</button>
-            <button type="reset" class="btn" style="margin-left:10px; background: #6c757d;">重置</button>
+            <button type="button" class="btn" style="margin-left:10px; background: #6c757d;" onclick="window.location.href='<%= ctx %>/system/dept/list'">重置</button>
         </form>
         <c:if test="${sessionScope.permissionCodes != null && sessionScope.permissionCodes.contains('system:manage')}">
             <a href="<%= ctx %>/system/dept/add" class="btn">添加部门</a>
