@@ -47,9 +47,11 @@
         <div class="note">
             <strong>导入说明：</strong><br>
             1. 请先创建年级和班级信息<br>
-            2. Excel文件格式：学号、姓名、性别(男/女)、出生日期(yyyy-MM-dd)、班级ID、电话、地址<br>
-            3. 第一行为表头，从第二行开始为数据
+            2. Excel文件格式：学号、姓名、性别(1=男/2=女)、出生日期(yyyy-MM-dd)、班级ID、电话、地址、状态(1=启用/0=禁用)<br>
+            3. 第一行为表头，从第二行开始为数据<br>
+            4. 带*号的字段为必填项
         </div>
+        <a href="<%= ctx %>/school/student/template" class="btn" style="margin-bottom: 15px; display: inline-block;">下载导入模板</a>
         <form action="<%= ctx %>/school/student/import" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label>选择Excel文件</label>
