@@ -17,6 +17,9 @@ public class SysDeptController {
     @Autowired
     private SysDeptService deptService;
 
+    @Autowired
+    private com.example.service.SysUserService userService;
+
     @GetMapping("/list")
     public String list(Model model, HttpSession session,
                        @RequestParam(required = false) String deptName,
@@ -68,9 +71,16 @@ public class SysDeptController {
     }
 
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable Integer id, HttpSession session) {
+    public String delete(@PathVariable Integer id, HttpSession session, Model model) {
         if (session.getAttribute("username") == null) {
             return "redirect:/login";
+        }
+        int userCount = userService.countByDeptId(id);
+        if (userCount > 0) {
+            model.addAttribute("error", "该部门已被 " + userCount + " 个用户使用，无法删除");
+            List<SysDept> depts = deptService.findAll();
+            model.addAttribute("depts", depts);
+            return "system/dept/list";
         }
         deptService.deleteById(id);
         return "redirect:/system/dept/list";

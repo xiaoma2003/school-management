@@ -57,6 +57,9 @@
             <a href="<%= ctx %>/logout">退出登录</a>
         </div>
         <h2>部门管理</h2>
+        <c:if test="${not empty error}">
+            <div class="error-msg">${error}</div>
+        </c:if>
         <form action="<%= ctx %>/system/dept/list" method="get" style="margin: 15px 0;">
             <input type="text" name="deptName" placeholder="请输入部门名称" style="width: 200px; padding: 8px; border: 1px solid #ddd;" value="<%= request.getParameter("deptName") == null ? "" : request.getParameter("deptName") %>"/>
             <input type="text" name="deptCode" placeholder="请输入部门编码" style="width: 200px; padding: 8px; border: 1px solid #ddd; margin-left: 10px;" value="<%= request.getParameter("deptCode") == null ? "" : request.getParameter("deptCode") %>"/>
