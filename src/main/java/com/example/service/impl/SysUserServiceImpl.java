@@ -66,6 +66,21 @@ public class SysUserServiceImpl implements SysUserService {
         return false;
     }
 
+    @Override
+    public int countByPostId(Integer postId) {
+        return userMapper.countByPostId(postId);
+    }
+
+    @Override
+    public int countByDeptId(Integer deptId) {
+        return userMapper.countByDeptId(deptId);
+    }
+
+    @Override
+    public int countByRoleId(Integer roleId) {
+        return userMapper.countByRoleId(roleId);
+    }
+
     private String MD5(String str) {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");

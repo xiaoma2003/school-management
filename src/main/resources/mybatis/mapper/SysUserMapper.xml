@@ -68,4 +68,13 @@
     <select id="countByUsername" resultType="int">
         SELECT COUNT(*) FROM sys_user WHERE username = #{username}
     </select>
+    <select id="countByPostId" resultType="int">
+        SELECT COUNT(*) FROM sys_user WHERE post_id = #{postId}
+    </select>
+    <select id="countByDeptId" resultType="int">
+        SELECT COUNT(*) FROM sys_user WHERE dept_id = #{deptId}
+    </select>
+    <select id="countByRoleId" resultType="int">
+        SELECT COUNT(*) FROM sys_user WHERE role_id = #{roleId}
+    </select>
 </mapper>

@@ -14,4 +14,7 @@ public interface SysUserService {
     void deleteById(Integer userId);
     boolean existsByUsername(String username);
     boolean login(String username, String password);
+    int countByPostId(Integer postId);
+    int countByDeptId(Integer deptId);
+    int countByRoleId(Integer roleId);
 }

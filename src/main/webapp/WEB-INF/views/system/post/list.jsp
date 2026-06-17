@@ -29,6 +29,7 @@
         .status-active { color: green; }
         .status-inactive { color: red; }
         .required { color: #dc3545; margin-left: 4px; }
+        .error-msg { background: #f8d7da; color: #721c24; padding: 10px 15px; border-radius: 4px; margin-bottom: 15px; border: 1px solid #f5c6cb; }
     </style>
     <script>
         function checkPermission(permissionCode) {
@@ -63,6 +64,9 @@
             <a href="<%= ctx %>/logout">退出登录</a>
         </div>
         <h2>岗位管理</h2>
+        <c:if test="${not empty error}">
+            <div class="error-msg">${error}</div>
+        </c:if>
         <form action="<%= ctx %>/system/post/list" method="get" style="margin: 15px 0;">
             <input type="text" name="postName" placeholder="请输入岗位名称" style="width: 200px; padding: 8px; border: 1px solid #ddd;" value="<%= request.getParameter("postName") == null ? "" : request.getParameter("postName") %>"/>
             <input type="text" name="postCode" placeholder="请输入岗位编码" style="width: 200px; padding: 8px; border: 1px solid #ddd; margin-left: 10px;" value="<%= request.getParameter("postCode") == null ? "" : request.getParameter("postCode") %>"/>

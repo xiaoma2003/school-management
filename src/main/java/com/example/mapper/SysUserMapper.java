@@ -16,4 +16,7 @@ public interface SysUserMapper {
     void update(SysUser user);
     void deleteById(Integer userId);
     int countByUsername(String username);
+    int countByPostId(Integer postId);
+    int countByDeptId(Integer deptId);
+    int countByRoleId(Integer roleId);
 }

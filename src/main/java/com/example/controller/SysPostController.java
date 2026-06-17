@@ -2,6 +2,7 @@ package com.example.controller;
 
 import com.example.entity.SysPost;
 import com.example.service.SysPostService;
+import com.example.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +17,9 @@ public class SysPostController {
 
     @Autowired
     private SysPostService postService;
+
+    @Autowired
+    private SysUserService userService;
 
     @GetMapping("/list")
     public String list(Model model, HttpSession session,
@@ -68,9 +72,16 @@ public class SysPostController {
     }
 
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable Integer id, HttpSession session) {
+    public String delete(@PathVariable Integer id, HttpSession session, Model model) {
         if (session.getAttribute("username") == null) {
             return "redirect:/login";
+        }
+        int userCount = userService.countByPostId(id);
+        if (userCount > 0) {
+            model.addAttribute("error", "该岗位已被 " + userCount + " 个用户使用，无法删除");
+            List<SysPost> posts = postService.findAll();
+            model.addAttribute("posts", posts);
+            return "system/post/list";
         }
         postService.deleteById(id);
         return "redirect:/system/post/list";
