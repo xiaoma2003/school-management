@@ -30,6 +30,7 @@
         .status-inactive { color: red; }
         .permission-tag { display: inline-block; padding: 2px 8px; background: #e3f2fd; color: #1976d2; border-radius: 4px; font-size: 12px; margin: 2px; }
         .required { color: #dc3545; margin-left: 4px; }
+        .error-msg { background: #f8d7da; color: #721c24; padding: 10px 15px; border-radius: 4px; margin-bottom: 15px; border: 1px solid #f5c6cb; }
     </style>
 </head>
 <body>
@@ -58,6 +59,9 @@
             <a href="<%= ctx %>/logout">退出登录</a>
         </div>
         <h2>角色管理</h2>
+        <c:if test="${not empty error}">
+            <div class="error-msg">${error}</div>
+        </c:if>
         <form action="<%= ctx %>/system/role/list" method="get" style="margin: 15px 0;">
             <input type="text" name="roleName" placeholder="请输入角色名称" style="width: 200px; padding: 8px; border: 1px solid #ddd;" value="<%= request.getParameter("roleName") == null ? "" : request.getParameter("roleName") %>"/>
             <input type="text" name="roleCode" placeholder="请输入角色编码" style="width: 200px; padding: 8px; border: 1px solid #ddd; margin-left: 10px;" value="<%= request.getParameter("roleCode") == null ? "" : request.getParameter("roleCode") %>"/>

@@ -19,6 +19,9 @@ public class SysRoleController {
     @Autowired
     private SysRoleService roleService;
 
+    @Autowired
+    private com.example.service.SysUserService userService;
+
     @GetMapping("/list")
     public String list(Model model, HttpSession session,
                        @RequestParam(required = false) String roleName,
@@ -105,9 +108,16 @@ public class SysRoleController {
     }
 
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable Integer id, HttpSession session) {
+    public String delete(@PathVariable Integer id, HttpSession session, org.springframework.ui.Model model) {
         if (session.getAttribute("username") == null) {
             return "redirect:/login";
+        }
+        int userCount = userService.countByRoleId(id);
+        if (userCount > 0) {
+            model.addAttribute("error", "该角色已被 " + userCount + " 个用户使用，无法删除");
+            java.util.List<com.example.entity.SysRole> roles = roleService.findAll();
+            model.addAttribute("roles", roles);
+            return "system/role/list";
         }
         roleService.deleteById(id);
         return "redirect:/system/role/list";
