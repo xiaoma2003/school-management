@@ -44,8 +44,12 @@ public class SysRoleServiceImpl implements SysRoleService {
     @Transactional
     public void save(SysRole role, List<Integer> permissionIds) {
         roleMapper.insert(role);
+        Integer roleId = role.getRoleId();
+        if (roleId == null) {
+            throw new RuntimeException("保存角色失败，未能获取角色ID");
+        }
         if (permissionIds != null && !permissionIds.isEmpty()) {
-            roleMapper.insertPermissions(role.getRoleId(), permissionIds);
+            roleMapper.insertPermissions(roleId, permissionIds);
         }
     }
 

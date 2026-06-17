@@ -36,7 +36,7 @@
     <select id="findByCode" resultType="com.example.entity.SysRole">
         SELECT * FROM sys_role WHERE role_code = #{roleCode}
     </select>
-    <insert id="insert">
+    <insert id="insert" parameterType="com.example.entity.SysRole" useGeneratedKeys="true" keyProperty="roleId">
         INSERT INTO sys_role (role_name, role_code, description, status)
         VALUES (#{roleName}, #{roleCode}, #{description}, #{status})
     </insert>
