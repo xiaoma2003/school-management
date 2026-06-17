@@ -73,4 +73,10 @@
         </where>
         ORDER BY e.equipment_id ASC
     </select>
+    <select id="countByClassId" resultType="int">
+        SELECT COUNT(*) FROM sys_equipment WHERE class_id = #{classId}
+    </select>
+    <select id="countByDeptId" resultType="int">
+        SELECT COUNT(*) FROM sys_equipment WHERE dept_id = #{deptId}
+    </select>
 </mapper>

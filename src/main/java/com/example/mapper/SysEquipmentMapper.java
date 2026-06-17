@@ -16,4 +16,6 @@ public interface SysEquipmentMapper {
     void deleteById(Integer equipmentId);
     void updateStatus(SysEquipment equipment);
     List<SysEquipment> search(@Param("keyword") String keyword, @Param("status") Integer status);
+    int countByClassId(@Param("classId") Integer classId);
+    int countByDeptId(@Param("deptId") Integer deptId);
 }

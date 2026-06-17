@@ -30,7 +30,7 @@
         .status-inactive { color: red; }
         .permission-tag { display: inline-block; padding: 2px 8px; background: #e3f2fd; color: #1976d2; border-radius: 4px; font-size: 12px; margin: 2px; }
         .required { color: #dc3545; margin-left: 4px; }
-        .error-msg { background: #f8d7da; color: #721c24; padding: 10px 15px; border-radius: 4px; margin-bottom: 15px; border: 1px solid #f5c6cb; }
+        .error-msg { background: #dc3545; color: white; padding: 10px 15px; border-radius: 4px; margin-bottom: 15px; }
     </style>
 </head>
 <body>

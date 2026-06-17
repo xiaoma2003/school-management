@@ -21,6 +21,9 @@ public class SysClassController {
     @Autowired
     private SysGradeService gradeService;
 
+    @Autowired
+    private com.example.service.SysEquipmentService equipmentService;
+
     @GetMapping("/list")
     public String list(@RequestParam(required = false) String className,
                        @RequestParam(required = false) Integer gradeId,
@@ -76,9 +79,16 @@ public class SysClassController {
     }
 
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable Integer id, HttpSession session) {
+    public String delete(@PathVariable Integer id, HttpSession session, Model model) {
         if (session.getAttribute("username") == null) {
             return "redirect:/login";
+        }
+        int equipmentCount = equipmentService.countByClassId(id);
+        if (equipmentCount > 0) {
+            model.addAttribute("error", "该班级已关联 " + equipmentCount + " 台设备，无法删除");
+            model.addAttribute("classes", classService.findAll());
+            model.addAttribute("grades", gradeService.findAll());
+            return "school/class/list";
         }
         classService.deleteById(id);
         return "redirect:/school/class/list";

@@ -29,6 +29,7 @@
         .status-active { color: green; }
         .status-inactive { color: red; }
         .required { color: #dc3545; margin-left: 4px; }
+        .error-msg { background: #dc3545; color: white; padding: 10px 15px; border-radius: 4px; margin-bottom: 15px; }
     </style>
 </head>
 <body>

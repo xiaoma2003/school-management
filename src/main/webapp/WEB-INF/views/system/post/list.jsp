@@ -29,7 +29,7 @@
         .status-active { color: green; }
         .status-inactive { color: red; }
         .required { color: #dc3545; margin-left: 4px; }
-        .error-msg { background: #f8d7da; color: #721c24; padding: 10px 15px; border-radius: 4px; margin-bottom: 15px; border: 1px solid #f5c6cb; }
+        .error-msg { background: #dc3545; color: white; padding: 10px 15px; border-radius: 4px; margin-bottom: 15px; }
     </style>
     <script>
         function checkPermission(permissionCode) {

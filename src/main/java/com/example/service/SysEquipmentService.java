@@ -13,4 +13,6 @@ public interface SysEquipmentService {
     void deleteById(Integer equipmentId);
     void updateStatus(Integer equipmentId, Integer status, String remark);
     List<SysEquipment> search(String keyword, Integer status);
+    int countByClassId(Integer classId);
+    int countByDeptId(Integer deptId);
 }

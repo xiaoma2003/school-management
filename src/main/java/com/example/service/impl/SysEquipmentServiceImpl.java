@@ -57,4 +57,14 @@ public class SysEquipmentServiceImpl implements SysEquipmentService {
     public List<SysEquipment> search(String keyword, Integer status) {
         return equipmentMapper.search(keyword, status);
     }
+
+    @Override
+    public int countByClassId(Integer classId) {
+        return equipmentMapper.countByClassId(classId);
+    }
+
+    @Override
+    public int countByDeptId(Integer deptId) {
+        return equipmentMapper.countByDeptId(deptId);
+    }
 }
