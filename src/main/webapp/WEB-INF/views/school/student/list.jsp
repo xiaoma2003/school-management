@@ -13,7 +13,7 @@
         .sidebar li:hover { background: #34495e; }
         .sidebar a { color: white; text-decoration: none; display: block; }
         .sidebar .nav-module { background: #1e88e5; }
-        .content { margin-left: 200px; padding: 20px; height: 100vh; overflow-y: auto; height: 100vh; overflow-y: auto; }
+        .content { margin-left: 200px; padding: 20px; height: 100vh; overflow-y: auto; }
         .header { background: #f8f9fa; padding: 15px 20px; border-bottom: 1px solid #e9ecef; }
         .header a { float: right; color: #666; text-decoration: none; }
         .welcome { font-size: 18px; color: #333; }
@@ -30,19 +30,26 @@
         th { background: #f8f9fa; }
         .status-active { color: green; }
         .status-inactive { color: red; }
-    .required { color: #dc3545; margin-left: 4px; }
-</style>
+        .required { color: #dc3545; margin-left: 4px; }
+    </style>
 </head>
 <body>
     <div class="sidebar">
         <h2>校生通管理系统</h2>
         <ul>
             <li><a href="<%= ctx %>/main">首页</a></li>
-            <li class="nav-module"><a href="<%= ctx %>/system/post/list">系统管理</a></li>
-            <li><a href="<%= ctx %>/school/grade/list">年级管理</a></li>
-            <li><a href="<%= ctx %>/school/class/list">班级管理</a></li>
-            <li><a href="<%= ctx %>/school/student/list">学生管理</a></li>
-            <li class="nav-module"><a href="<%= ctx %>/equipment/list">设备管理</a></li>
+            <c:if test="${sessionScope.permissionCodes != null && sessionScope.permissionCodes.contains('system:manage')}">
+                <li class="nav-module"><a href="<%= ctx %>/system/post/list">系统管理</a></li>
+            </c:if>
+            <c:if test="${sessionScope.permissionCodes != null && (sessionScope.permissionCodes.contains('school:view') || sessionScope.permissionCodes.contains('school:manage'))}">
+                <li class="nav-module"><a href="<%= ctx %>/school/grade/list">学校管理</a></li>
+                <li><a href="<%= ctx %>/school/grade/list">年级管理</a></li>
+                <li><a href="<%= ctx %>/school/class/list">班级管理</a></li>
+                <li><a href="<%= ctx %>/school/student/list">学生管理</a></li>
+            </c:if>
+            <c:if test="${sessionScope.permissionCodes != null && (sessionScope.permissionCodes.contains('equipment:view') || sessionScope.permissionCodes.contains('equipment:manage'))}">
+                <li class="nav-module"><a href="<%= ctx %>/equipment/list">设备管理</a></li>
+            </c:if>
         </ul>
     </div>
     <div class="content">
@@ -51,8 +58,10 @@
             <a href="<%= ctx %>/logout">退出登录</a>
         </div>
         <h2>学生管理</h2>
-        <a href="<%= ctx %>/school/student/add" class="btn">添加学生</a>
-        <a href="<%= ctx %>/school/student/import" class="btn btn-import">导入学生</a>
+        <c:if test="${sessionScope.permissionCodes != null && sessionScope.permissionCodes.contains('school:manage')}">
+            <a href="<%= ctx %>/school/student/add" class="btn">添加学生</a>
+            <a href="<%= ctx %>/school/student/import" class="btn btn-import">导入学生</a>
+        </c:if>
         <form action="<%= ctx %>/school/student/list" method="get" style="margin: 15px 0;">
             <input type="text" name="studentNo" placeholder="请输入学号"
                    value="<%= request.getParameter("studentNo") == null ? "" : request.getParameter("studentNo") %>"
@@ -84,8 +93,10 @@
                 <td>${student.phone}</td>
                 <td><span class="${student.status == 1 ? 'status-active' : 'status-inactive'}">${student.status == 1 ? '正常' : '禁用'}</span></td>
                 <td>
-                    <a href="<%= ctx %>/school/student/edit/${student.studentId}" class="btn btn-edit" style="display: inline-block;">编辑</a>
-                    <a href="<%= ctx %>/school/student/delete/${student.studentId}" class="btn btn-danger" style="display: inline-block;" onclick="return confirm('确定删除？')">删除</a>
+                    <c:if test="${sessionScope.permissionCodes != null && sessionScope.permissionCodes.contains('school:manage')}">
+                        <a href="<%= ctx %>/school/student/edit/${student.studentId}" class="btn btn-edit" style="display: inline-block;">编辑</a>
+                        <a href="<%= ctx %>/school/student/delete/${student.studentId}" class="btn btn-danger" style="display: inline-block;" onclick="return confirm('确定删除？')">删除</a>
+                    </c:if>
                 </td>
             </tr>
             </c:forEach>

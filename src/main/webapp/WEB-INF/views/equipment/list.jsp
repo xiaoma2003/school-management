@@ -14,7 +14,7 @@
         .sidebar a { color: white; text-decoration: none; display: block; }
         .sidebar .nav-module { background: #1e88e5; }
         .sidebar .active { background: #34495e; }
-        .content { margin-left: 200px; padding: 20px; height: 100vh; overflow-y: auto; height: 100vh; overflow-y: auto; }
+        .content { margin-left: 200px; padding: 20px; height: 100vh; overflow-y: auto; }
         .header { background: #f8f9fa; padding: 15px 20px; border-bottom: 1px solid #e9ecef; }
         .header a { float: right; color: #666; text-decoration: none; }
         .welcome { font-size: 18px; color: #333; }
@@ -37,17 +37,24 @@
         .modal-header { font-size: 18px; font-weight: bold; margin-bottom: 15px; }
         .modal-footer { text-align: right; margin-top: 15px; }
         .modal .btn-cancel { background: #6c757d; }
-    .required { color: #dc3545; margin-left: 4px; }
-</style>
+        .required { color: #dc3545; margin-left: 4px; }
+    </style>
 </head>
 <body>
     <div class="sidebar">
         <h2>校生通管理系统</h2>
         <ul>
             <li><a href="<%= ctx %>/main">首页</a></li>
-            <li class="nav-module"><a href="<%= ctx %>/system/post/list">系统管理</a></li>
-            <li class="nav-module"><a href="<%= ctx %>/school/grade/list">学校管理</a></li>
-            <li><a href="<%= ctx %>/equipment/list" class="active">设备管理</a></li>
+            <c:if test="${sessionScope.permissionCodes != null && sessionScope.permissionCodes.contains('system:manage')}">
+                <li class="nav-module"><a href="<%= ctx %>/system/post/list">系统管理</a></li>
+            </c:if>
+            <c:if test="${sessionScope.permissionCodes != null && (sessionScope.permissionCodes.contains('school:view') || sessionScope.permissionCodes.contains('school:manage'))}">
+                <li class="nav-module"><a href="<%= ctx %>/school/grade/list">学校管理</a></li>
+            </c:if>
+            <c:if test="${sessionScope.permissionCodes != null && (sessionScope.permissionCodes.contains('equipment:view') || sessionScope.permissionCodes.contains('equipment:manage'))}">
+                <li class="nav-module"><a href="<%= ctx %>/equipment/list">设备管理</a></li>
+                <li><a href="<%= ctx %>/equipment/list" class="active">设备列表</a></li>
+            </c:if>
         </ul>
     </div>
     <div class="content">
@@ -68,7 +75,9 @@
             <button type="submit" class="btn">搜索</button>
             <button type="button" class="btn btn-edit" onclick="location.href='<%= ctx %>/equipment/list'">重置</button>
         </form>
-        <a href="<%= ctx %>/equipment/add" class="btn">添加设备</a>
+        <c:if test="${sessionScope.permissionCodes != null && sessionScope.permissionCodes.contains('equipment:manage')}">
+            <a href="<%= ctx %>/equipment/add" class="btn">添加设备</a>
+        </c:if>
         <table>
             <tr>
                 <th>设备编号</th>
@@ -92,9 +101,11 @@
                 </td>
                 <td>${equipment.remark == null ? '-' : equipment.remark}</td>
                 <td>
-                    <a href="<%= ctx %>/equipment/edit/${equipment.equipmentId}" class="btn btn-edit" style="display: inline-block;">编辑</a>
-                    <button onclick="showStatusModal(${equipment.equipmentId}, ${equipment.status})" class="btn btn-warning" style="display: inline-block;">改状态</button>
-                    <a href="<%= ctx %>/equipment/delete/${equipment.equipmentId}" class="btn btn-danger" style="display: inline-block;" onclick="return confirm('确定删除？')">删除</a>
+                    <c:if test="${sessionScope.permissionCodes != null && sessionScope.permissionCodes.contains('equipment:manage')}">
+                        <a href="<%= ctx %>/equipment/edit/${equipment.equipmentId}" class="btn btn-edit" style="display: inline-block;">编辑</a>
+                        <button onclick="showStatusModal(${equipment.equipmentId}, ${equipment.status})" class="btn btn-warning" style="display: inline-block;">改状态</button>
+                        <a href="<%= ctx %>/equipment/delete/${equipment.equipmentId}" class="btn btn-danger" style="display: inline-block;" onclick="return confirm('确定删除？')">删除</a>
+                    </c:if>
                 </td>
             </tr>
             </c:forEach>
